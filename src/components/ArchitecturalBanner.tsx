@@ -23,24 +23,21 @@ function BannerBackdrop({ width, height }: { width: number; height: number }) {
       <line x1="0" y1={height} x2={width} y2="0" stroke="var(--bp-ink)" strokeOpacity="0.1" strokeWidth="1" strokeDasharray="4 6" />
       <line x1="0" y1="0" x2={width * 0.6} y2={height} stroke="var(--bp-ink)" strokeOpacity="0.08" strokeWidth="1" strokeDasharray="4 6" />
       <line x1={width * 0.4} y1="0" x2={width} y2={height} stroke="var(--bp-ink)" strokeOpacity="0.08" strokeWidth="1" strokeDasharray="4 6" />
+      <line x1="0" y1={height * 0.3} x2={width} y2={height * 0.7} stroke="var(--bp-ink)" strokeOpacity="0.06" strokeWidth="1" strokeDasharray="3 6" />
 
-      <g opacity="0.6" transform={`translate(${width * 0.08}, -40)`}>
-        <polygon points="0,100 75,60 150,100 75,140" fill="url(#backdropHatch)" stroke={EDGE} strokeOpacity="0.3" strokeWidth="1" />
-        <polygon points="0,100 75,140 75,190 0,150" fill={EDGE} fillOpacity="0.03" stroke={EDGE} strokeOpacity="0.2" strokeWidth="1" />
-        <polygon points="150,100 75,140 75,190 150,150" fill={EDGE} fillOpacity="0.015" stroke={EDGE} strokeOpacity="0.2" strokeWidth="1" />
-      </g>
-
-      <g opacity="0.6" transform={`translate(${width * 0.5 - 75}, -40)`}>
-        <polygon points="0,100 75,60 150,100 75,140" fill="url(#backdropHatch)" stroke={EDGE} strokeOpacity="0.3" strokeWidth="1" />
-        <polygon points="0,100 75,140 75,190 0,150" fill={EDGE} fillOpacity="0.03" stroke={EDGE} strokeOpacity="0.2" strokeWidth="1" />
-        <polygon points="150,100 75,140 75,190 150,150" fill={EDGE} fillOpacity="0.015" stroke={EDGE} strokeOpacity="0.2" strokeWidth="1" />
-      </g>
-
-      <g opacity="0.6" transform={`translate(${width * 0.86 - 75}, -30)`}>
-        <polygon points="0,100 75,60 150,100 75,140" fill="url(#backdropHatch)" stroke={EDGE} strokeOpacity="0.3" strokeWidth="1" />
-        <polygon points="0,100 75,140 75,190 0,150" fill={EDGE} fillOpacity="0.03" stroke={EDGE} strokeOpacity="0.2" strokeWidth="1" />
-        <polygon points="150,100 75,140 75,190 150,150" fill={EDGE} fillOpacity="0.015" stroke={EDGE} strokeOpacity="0.2" strokeWidth="1" />
-      </g>
+      {/* Alternating V (top perimeter) and ^ (bottom perimeter) chevrons */}
+      {[0, 1, 2, 3, 4, 5].map((i) => {
+        const x = (width / 5) * i - 90;
+        const isBottom = i % 2 === 1;
+        const y = isBottom ? height - 150 : -85;
+        return (
+          <g key={`bg-box-${i}`} opacity="0.5" transform={`translate(${x}, ${y})`}>
+            <polygon points="0,120 90,70 180,120 90,170" fill="url(#backdropHatch)" stroke={EDGE} strokeOpacity="0.3" strokeWidth="1" />
+            <polygon points="0,120 90,170 90,240 0,190" fill={EDGE} fillOpacity="0.03" stroke={EDGE} strokeOpacity="0.22" strokeWidth="1" />
+            <polygon points="180,120 90,170 90,240 180,190" fill={EDGE} fillOpacity="0.015" stroke={EDGE} strokeOpacity="0.22" strokeWidth="1" />
+          </g>
+        );
+      })}
     </svg>
   );
 }
