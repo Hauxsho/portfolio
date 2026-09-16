@@ -1,21 +1,16 @@
-import type { FC } from 'react';
+import { useState, useEffect, type FC } from 'react';
 import './ArchitecturalBanner.css';
 
-const VB_W = 1600;
-const VB_H = 480;
-const ICON_Y = 240;
-const BASE_Y = 330;
-const R = 60;
-
-const NODE_X = [200, 440, 680, 920, 1160, 1400];
-
+const ICON_Y = 175;
+const BASE_Y = 250;
+const R = 54;
 const EDGE = 'var(--bp-cyan)';
 
-function BannerBackdrop() {
+function BannerBackdrop({ width, height }: { width: number; height: number }) {
   return (
     <svg
       className="arch-backdrop-svg"
-      viewBox="0 0 1600 480"
+      viewBox={`0 0 ${width} ${height}`}
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
     >
@@ -25,58 +20,34 @@ function BannerBackdrop() {
         </pattern>
       </defs>
 
-      <line x1="0" y1="480" x2="1600" y2="0" stroke="var(--bp-ink)" strokeOpacity="0.12" strokeWidth="1" strokeDasharray="4 6" />
-      <line x1="0" y1="0" x2="900" y2="480" stroke="var(--bp-ink)" strokeOpacity="0.09" strokeWidth="1" strokeDasharray="4 6" />
-      <line x1="700" y1="0" x2="1600" y2="480" stroke="var(--bp-ink)" strokeOpacity="0.09" strokeWidth="1" strokeDasharray="4 6" />
-      <line x1="200" y1="0" x2="0" y2="300" stroke="var(--bp-ink)" strokeOpacity="0.08" strokeWidth="1" strokeDasharray="3 5" />
-      <line x1="1600" y1="120" x2="1300" y2="480" stroke="var(--bp-ink)" strokeOpacity="0.08" strokeWidth="1" strokeDasharray="3 5" />
-      <line x1="400" y1="480" x2="600" y2="0" stroke="var(--bp-ink)" strokeOpacity="0.07" strokeWidth="1" strokeDasharray="4 6" />
-      <line x1="1000" y1="0" x2="1200" y2="480" stroke="var(--bp-ink)" strokeOpacity="0.07" strokeWidth="1" strokeDasharray="4 6" />
-      <line x1="0" y1="90" x2="1600" y2="390" stroke="var(--bp-ink)" strokeOpacity="0.06" strokeWidth="1" strokeDasharray="2 5" />
+      <line x1="0" y1={height} x2={width} y2="0" stroke="var(--bp-ink)" strokeOpacity="0.1" strokeWidth="1" strokeDasharray="4 6" />
+      <line x1="0" y1="0" x2={width * 0.6} y2={height} stroke="var(--bp-ink)" strokeOpacity="0.08" strokeWidth="1" strokeDasharray="4 6" />
+      <line x1={width * 0.4} y1="0" x2={width} y2={height} stroke="var(--bp-ink)" strokeOpacity="0.08" strokeWidth="1" strokeDasharray="4 6" />
 
-      <g opacity="0.65" transform="translate(1220,-70)">
-        <polygon points="0,120 90,70 180,120 90,170" fill="url(#backdropHatch)" stroke={EDGE} strokeOpacity="0.3" strokeWidth="1" />
-        <polygon points="0,120 90,170 90,240 0,190" fill={EDGE} fillOpacity="0.03" stroke={EDGE} strokeOpacity="0.22" strokeWidth="1" />
-        <polygon points="180,120 90,170 90,240 180,190" fill={EDGE} fillOpacity="0.015" stroke={EDGE} strokeOpacity="0.22" strokeWidth="1" />
+      <g opacity="0.6" transform={`translate(${width * 0.08}, -40)`}>
+        <polygon points="0,100 75,60 150,100 75,140" fill="url(#backdropHatch)" stroke={EDGE} strokeOpacity="0.3" strokeWidth="1" />
+        <polygon points="0,100 75,140 75,190 0,150" fill={EDGE} fillOpacity="0.03" stroke={EDGE} strokeOpacity="0.2" strokeWidth="1" />
+        <polygon points="150,100 75,140 75,190 150,150" fill={EDGE} fillOpacity="0.015" stroke={EDGE} strokeOpacity="0.2" strokeWidth="1" />
       </g>
 
-      <g opacity="0.65" transform="translate(10,-70)">
-        <polygon points="0,120 90,70 180,120 90,170" fill="url(#backdropHatch)" stroke={EDGE} strokeOpacity="0.3" strokeWidth="1" />
-        <polygon points="0,120 90,170 90,240 0,190" fill={EDGE} fillOpacity="0.03" stroke={EDGE} strokeOpacity="0.22" strokeWidth="1" />
-        <polygon points="180,120 90,170 90,240 180,190" fill={EDGE} fillOpacity="0.015" stroke={EDGE} strokeOpacity="0.22" strokeWidth="1" />
+      <g opacity="0.6" transform={`translate(${width * 0.5 - 75}, -40)`}>
+        <polygon points="0,100 75,60 150,100 75,140" fill="url(#backdropHatch)" stroke={EDGE} strokeOpacity="0.3" strokeWidth="1" />
+        <polygon points="0,100 75,140 75,190 0,150" fill={EDGE} fillOpacity="0.03" stroke={EDGE} strokeOpacity="0.2" strokeWidth="1" />
+        <polygon points="150,100 75,140 75,190 150,150" fill={EDGE} fillOpacity="0.015" stroke={EDGE} strokeOpacity="0.2" strokeWidth="1" />
       </g>
 
-      <g opacity="0.65" transform="translate(300,90)">
-        <polygon points="0,120 90,70 180,120 90,170" fill="url(#backdropHatch)" stroke={EDGE} strokeOpacity="0.3" strokeWidth="1" />
-        <polygon points="0,120 90,170 90,240 0,190" fill={EDGE} fillOpacity="0.03" stroke={EDGE} strokeOpacity="0.22" strokeWidth="1" />
-        <polygon points="180,120 90,170 90,240 180,190" fill={EDGE} fillOpacity="0.015" stroke={EDGE} strokeOpacity="0.22" strokeWidth="1" />
+      <g opacity="0.6" transform={`translate(${width * 0.86 - 75}, -30)`}>
+        <polygon points="0,100 75,60 150,100 75,140" fill="url(#backdropHatch)" stroke={EDGE} strokeOpacity="0.3" strokeWidth="1" />
+        <polygon points="0,100 75,140 75,190 0,150" fill={EDGE} fillOpacity="0.03" stroke={EDGE} strokeOpacity="0.2" strokeWidth="1" />
+        <polygon points="150,100 75,140 75,190 150,150" fill={EDGE} fillOpacity="0.015" stroke={EDGE} strokeOpacity="0.2" strokeWidth="1" />
       </g>
-
-      <g opacity="0.65" transform="translate(600,-70)">
-        <polygon points="0,120 90,70 180,120 90,170" fill="url(#backdropHatch)" stroke={EDGE} strokeOpacity="0.3" strokeWidth="1" />
-        <polygon points="0,120 90,170 90,240 0,190" fill={EDGE} fillOpacity="0.03" stroke={EDGE} strokeOpacity="0.22" strokeWidth="1" />
-        <polygon points="180,120 90,170 90,240 180,190" fill={EDGE} fillOpacity="0.015" stroke={EDGE} strokeOpacity="0.22" strokeWidth="1" />
-      </g>
-
-      <g opacity="0.65" transform="translate(1560,90)">
-        <polygon points="0,120 90,70 180,120 90,170" fill="url(#backdropHatch)" stroke={EDGE} strokeOpacity="0.3" strokeWidth="1" />
-        <polygon points="0,120 90,170 90,240 0,190" fill={EDGE} fillOpacity="0.03" stroke={EDGE} strokeOpacity="0.22" strokeWidth="1" />
-        <polygon points="180,120 90,170 90,240 180,190" fill={EDGE} fillOpacity="0.015" stroke={EDGE} strokeOpacity="0.22" strokeWidth="1" />
-      </g>
-
-      <g opacity="0.22" transform="translate(60,340)">
-        <polygon points="0,60 50,35 100,60 50,85" fill="url(#backdropHatch)" stroke={EDGE} strokeOpacity="0.25" strokeWidth="1" />
-        <polygon points="0,60 50,85 50,125 0,100" fill={EDGE} fillOpacity="0.02" stroke={EDGE} strokeOpacity="0.18" strokeWidth="1" />
-      </g>
-
-
     </svg>
   );
 }
 
 function DiamondBase({ x }: { x: number }) {
-  const w = 96;
-  const h = 34;
+  const w = 84;
+  const h = 28;
   return (
     <polygon
       points={`${x},${BASE_Y - h / 2} ${x + w / 2},${BASE_Y} ${x},${BASE_Y + h / 2} ${x - w / 2},${BASE_Y}`}
@@ -180,17 +151,35 @@ const CloudIcon: FC<{ x: number }> = ({ x }) => {
   );
 };
 
-const NODES: FC<{ x: number }>[] = [UsersIcon, CodeIcon, ServersIcon, QueueIcon, DatabaseIcon, CloudIcon];
+const DESKTOP_NODES = [UsersIcon, CodeIcon, ServersIcon, QueueIcon, DatabaseIcon, CloudIcon];
+const MOBILE_NODES = [UsersIcon, ServersIcon, QueueIcon, DatabaseIcon];
 
 export default function ArchitecturalBanner() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)');
+    const update = (e: MediaQueryListEvent | MediaQueryList) => setIsMobile(e.matches);
+    update(mq);
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  const nodes = isMobile ? MOBILE_NODES : DESKTOP_NODES;
+  const vbW = isMobile ? 960 : 1600;
+  const vbH = isMobile ? 360 : 420;
+  const padding = isMobile ? 120 : 160;
+  const step = (vbW - padding * 2) / (nodes.length - 1);
+  const nodeX = Array.from({ length: nodes.length }, (_, i) => padding + i * step);
+
   return (
     <div className="arch-banner-wrapper">
       <div className="arch-canvas-frame">
-        <BannerBackdrop />
+        <BannerBackdrop width={vbW} height={vbH} />
 
         <svg
           className="arch-isometric-svg"
-          viewBox={`0 0 ${VB_W} ${VB_H}`}
+          viewBox={`0 0 ${vbW} ${vbH}`}
           fill="none"
           preserveAspectRatio="xMidYMid meet"
           aria-hidden="true"
@@ -208,29 +197,41 @@ export default function ArchitecturalBanner() {
             </marker>
           </defs>
 
-          {NODE_X.map((x) => <DiamondBase x={x} key={`base-${x}`} />)}
+          {nodeX.map((x) => (
+            <DiamondBase x={x} key={`base-${x}`} />
+          ))}
 
-          {NODE_X.slice(0, -1).map((x, i) => {
-            const id = `arrow-${i}`;
+          {nodeX.slice(0, -1).map((x, i) => {
+            const nextX = nodeX[i + 1];
+            const id = `arrow-${isMobile ? 'm' : 'd'}-${i}`;
             return (
               <g key={id}>
                 <path
                   id={id}
-                  d={`M ${x + R} ${ICON_Y} L ${NODE_X[i + 1] - R} ${ICON_Y}`}
-                  stroke={EDGE} strokeWidth="2" strokeOpacity="0.6"
-                  markerEnd="url(#flowArrowhead)" filter="url(#neonGlow)"
+                  d={`M ${x + R} ${ICON_Y} L ${nextX - R} ${ICON_Y}`}
+                  stroke={EDGE}
+                  strokeWidth="2"
+                  strokeOpacity="0.6"
+                  markerEnd="url(#flowArrowhead)"
+                  filter="url(#neonGlow)"
                 />
                 <circle r="3.5" fill={EDGE} filter="url(#neonGlow)">
-                  <animateMotion dur="1.8s" begin="0s" repeatCount="indefinite"><mpath href={`#${id}`} /></animateMotion>
+                  <animateMotion dur="1.8s" begin="0s" repeatCount="indefinite">
+                    <mpath href={`#${id}`} />
+                  </animateMotion>
                 </circle>
                 <circle r="3.5" fill={EDGE} filter="url(#neonGlow)" opacity="0.6">
-                  <animateMotion dur="1.8s" begin="0.9s" repeatCount="indefinite"><mpath href={`#${id}`} /></animateMotion>
+                  <animateMotion dur="1.8s" begin="0.9s" repeatCount="indefinite">
+                    <mpath href={`#${id}`} />
+                  </animateMotion>
                 </circle>
               </g>
             );
           })}
 
-          {NODES.map((Icon, i) => <Icon x={NODE_X[i]} key={`n-${i}`} />)}
+          {nodes.map((Icon, i) => (
+            <Icon x={nodeX[i]} key={`n-${i}`} />
+          ))}
         </svg>
       </div>
 

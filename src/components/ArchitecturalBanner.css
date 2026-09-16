@@ -5,7 +5,9 @@
 
 .arch-canvas-frame {
   width: 100%;
-  height: 220px;
+  aspect-ratio: 16 / 4.8;
+  min-height: 170px;
+  max-height: 240px;
   background: var(--bp-plate);
   border: 1px solid var(--bp-hairline);
   border-radius: var(--radius-lg);
@@ -56,17 +58,17 @@
   align-items: flex-end;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 20px;
-  padding: 0 12px;
-  margin-top: -84px;
+  gap: 16px;
+  padding: 0 16px;
+  margin-top: -54px;
   position: relative;
   z-index: 2;
 }
 
 .arch-avatar-container {
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: clamp(86px, 12vw, 130px);
+  height: clamp(86px, 12vw, 130px);
   flex-shrink: 0;
 }
 
@@ -165,19 +167,21 @@
 
 @media (max-width: 768px) {
   .arch-canvas-frame {
-    height: 180px;
+    aspect-ratio: 16 / 6;
+    min-height: 150px;
   }
 
   .arch-profile-row {
-    margin-top: -80px;
+    margin-top: -42px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
+    gap: 12px;
+    padding: 0 8px;
   }
 
   .arch-avatar-container {
-    width: 100px;
-    height: 100px;
+    width: 86px;
+    height: 86px;
   }
 
   .arch-identity-wrap {
