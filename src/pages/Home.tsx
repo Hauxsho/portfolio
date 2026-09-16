@@ -56,7 +56,7 @@ export default function Home() {
               shubhamsrivastavaa9@gmail.com
             </a>
             <a
-              href={unit === 'INR' ? '/Shubham_Srivastava_Backend_Engineer.pdf' : '/Shubham_Srivastava_Backend_Engineer_Remote.pdf'}
+              href={`${import.meta.env.BASE_URL}${unit === 'INR' ? 'Shubham_Srivastava_Backend_Engineer.pdf' : 'Shubham_Srivastava_Backend_Engineer_Remote.pdf'}`}
               download={unit === 'INR' ? 'Shubham_Srivastava_Backend_Engineer.pdf' : 'Shubham_Srivastava_Backend_Engineer_Remote.pdf'}
               target="_blank"
               rel="noopener noreferrer"

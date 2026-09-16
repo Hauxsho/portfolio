@@ -236,7 +236,7 @@ export default function ArchitecturalBanner() {
 
       <div className="arch-profile-row">
         <div className="arch-avatar-container">
-          <img src="/avatar.jpg" alt="Shubham Srivastava" className="arch-avatar-img" />
+          <img src={`${import.meta.env.BASE_URL}avatar.jpg`} alt="Shubham Srivastava" className="arch-avatar-img" />
           <span className="arch-status-dot" title="Available for Opportunities" />
         </div>
 
