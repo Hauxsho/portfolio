@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import './ArchitecturalBanner.css';
 
-const VB_W = 800;
+const VB_W = 1600;
 const VB_H = 480;
 const ICON_Y = 240;
 const BASE_Y = 330;
